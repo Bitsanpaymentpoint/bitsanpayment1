@@ -68,7 +68,7 @@ img {
     width: fit-content;
     margin: 0 auto;
     padding: 0.9rem 2rem;
-    background-color: #41a1f4;
+    background-color: 1a1f4;
     transition: var(--transition);
     border-radius:1.5rem ;
     -webkit-border-radius:1.5rem ;
@@ -94,6 +94,8 @@ img {
     -moz-border-radius: 2rem;
     -ms-border-radius: 2rem;
     -o-border-radius: 2rem;
+    background: #41a1f4;
+
 }
 
 .btn.sm {

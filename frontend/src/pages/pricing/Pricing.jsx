@@ -27,13 +27,13 @@ const Pricing = () => {
     </div>
     <div className="pricingBis">
       <div className="priceText">
-       <h3>Business love us</h3>
+       <h3>PAYMENTS IN</h3>
        <p></p>
       </div>
       <div className="priceLink">
-      <SectionHeader icon={<GiPayMoney/>} title="payday"/>
-      <SectionHeader icon={<FiCircle/>} title="celo"/>
-      <SectionHeader icon={<GiThreeLeaves/>} title="Huobi"/>
+      <SectionHeader icon={<GiPayMoney/>} title="ETH"/>
+      <SectionHeader icon={<FiCircle/>} title="cUSD"/>
+      <SectionHeader icon={<GiThreeLeaves/>} title="USDT"/>
       
       </div>
       

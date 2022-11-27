@@ -1,12 +1,27 @@
 import React, { useState } from "react";
+import { axios } from "../utils/axios";
 
-export const Login = (props) => {
+export const ContactUsForm = (props) => {
   const [email, setEmail] = useState("");
-  const [pass, setPass] = useState("");
+  const [message, setMessage] = useState("");
+  const [subject, setSubject] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(email);
+    if (email && message && subject) {
+      axios
+        .post("/sendContactMail", { from: email, message, subject })
+        .then((data)=>{
+          alert("Thanks for contacting us, we will get back to you soon.")
+          console.log(data)
+          setEmail("")
+          setMessage("")
+          setSubject("")
+        })
+        .catch(console.log);
+    } else {
+      alert("Please fill in all required fields below");
+    }
   };
 
   return (
@@ -14,7 +29,14 @@ export const Login = (props) => {
       <h2>Contact</h2>
       <form className="login-form" onSubmit={handleSubmit}>
         <label htmlFor="subject">Subject</label>
-        <input type="text" placeholder="Subject" id="subject" name="subject" />
+        <input
+          type="text"
+          value={subject}
+          placeholder="Subject"
+          id="subject"
+          name="subject"
+          onChange={(e) => setSubject(e.target.value)}
+        />
 
         <label htmlFor="email">Your Email</label>
         <input
@@ -28,11 +50,11 @@ export const Login = (props) => {
 
         <label htmlFor="password">Message</label>
         <textarea
-          value={pass}
-          onChange={(e) => setPass(e.target.value)}
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
           id="info"
           name="info"
-          style={{ height: "200px", marginBottom: "2em",padding:"1em" }}
+          style={{ height: "200px", marginBottom: "2em", padding: "1em" }}
           placeholder="type in messages"
         ></textarea>
         <button type="submit">Send Mail</button>

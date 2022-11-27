@@ -8,7 +8,9 @@ const API = () => {
       <div className="main__api-left">
           <h2>Integrate our API to start building in sandbox</h2>
           <h3>Build in compliance infrastructure to meet all regulatory requirement</h3>
-          <Link to='/contact' className='btn sm'>Login</Link>
+          <br />
+          {/* <br /> */}
+          <Link to='/signin' className='btn sm'>Login</Link>
           
         </div>
       </div>

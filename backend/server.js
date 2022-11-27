@@ -16,6 +16,7 @@ const uploadProduct = require("./routes/createProduct");
 const userUpdate = require("./routes/updateUser");
 const transferToUser = require("./routes/tansferToUser");
 const sendMail = require("./routes/sendMail");
+const sendContactMail = require("./routes/sendContactMail")
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -40,6 +41,7 @@ app.use("/products", uploadProduct);
 app.use("/getUserProductLink", getUserProductLink);
 app.use("/userUpdate", userUpdate);
 app.use("/transferToUser", transferToUser);
+app.use("/sendContactMail", sendContactMail);
 
 // sendMail();
 

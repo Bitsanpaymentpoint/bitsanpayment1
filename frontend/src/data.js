@@ -56,21 +56,21 @@ export const usecase = [
     {
         id: 1,
         icon: <SiParsedotly/>,
-        title: "international funds transfer through Viat & $Crypto",
-        info: "Partner with Bitsan$ to offer payout service if you are NBFI or FI",
+        title: "Fiat and  Crypto payment Solution",
+        info: "Partner with Bitsan$ to offer payout service if you are NBFI or DEFI",
         path: "/usecase/111"
     },
     {
         id: 2,
         icon: <RiHandCoinFill/>,
-        title: "offer international business payments services",
+        title: "offer a  business payments services",
         info: "Enable all the region businesses to send payment globally",
         path: "/usecase/222"
     },
     {
         id: 3,
         icon: <FaCoins/>,
-        title: "Build international bill payment solution",
+        title: "Build international and Local bill payment solution",
         info: "Enable your customers to pay marchants, businesses, schools, hospitals etc. in the receiving country directly from all country",
         path: "/usecase/333"
     },
@@ -82,7 +82,7 @@ export const bitsans = [
     {
         id: 1,
         icon: <BiLoaderCircle/>,
-        title: "Start offering international payment services in 6 weeks",
+        title: "Start offering Crypto payment services in everyday",
         desc: 'integrate in our sandbox- Push configuration to production -Go live.'
     },
     {
@@ -95,7 +95,7 @@ export const bitsans = [
         id: 3,
         icon: <HiOutlineArrowsExpand/>,
         title: "Scale your business with our flexible API",
-        desc: 'Build your application to offer a wide range of international payment services to your customers.Build beyond remittance.'
+        desc: 'Build your application to offer a wide range of crypto  payment solution services to your customers.Build beyond remittance.'
     }
 
 ]

@@ -3,6 +3,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import Web3 from "web3";
 import { userCOntext } from "../../../context/context";
 import "./dashb.css";
+
 function Dashb() {
   const { user, refetchUser } = useContext(userCOntext);
   const [balance, setBalance] = useState("");
@@ -28,6 +29,7 @@ function Dashb() {
     getBalance();
   }, [user?.user?.address]);
 
+ 
   const navigate = useNavigate();
   return (
     <div className="dashb-body">
@@ -57,8 +59,8 @@ function Dashb() {
                   <div className="balance-label">Available balance</div>
                 </div>
                 <div className="btn_dashb">
-                <NavLink to="/dashboard/topup">
-                  <button>Top up</button>
+                  <NavLink to="/dashboard/topup">
+                    <button>Top up</button>
                   </NavLink>
                   <NavLink to="/dashboard/payout">
                     <button>Payout</button>
