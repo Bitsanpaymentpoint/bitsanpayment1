@@ -28,6 +28,9 @@ import AddressSending from "./components/dashbCom/sending/addressSending";
 import TopUp from "./components/dashbCom/topup/topup";
 import AddressTopUp from "./components/dashbCom/topup/addressTopUp";
 import BankTopUp from "./components/dashbCom/topup/bankTopUp";
+import ProductView from "./components/dashbCom/productView/productView";
+import ProductLinkPayment from "./components/dashbCom/productLinkPayment/productLinkPayment";
+import Reciept from "./components/dashbCom/reciept/reciept";
 
 // import PaymentLink from "./components/platform/PaymentLink";
 
@@ -119,21 +122,49 @@ const App = () => {
             />
             <Route path="signin" element={<SignIn />} />
             <Route path="dashboard" element={<Dashboard />} />
-            <Route path="payment_gateway/:id/:title" element={<RecievePayment />} />
-            <Route path="dashboard/payment_link_view/:id" element={<ViewPaymentLink />} />
+            <Route
+              path="payment_gateway/:id/:title"
+              element={<RecievePayment />}
+            />
+            <Route
+              path="dashboard/payment_link_view/:id"
+              element={<ViewPaymentLink />}
+            />
             <Route path="dashboard/profile" element={<Profile />} />
             <Route path="dashboard/transactions" element={<Transactions />} />
             <Route path="dashboard/payment_links" element={<PaymentLinks />} />
             <Route path="dashboard/payout" element={<Sending />} />
-            <Route path="dashboard/create_payment_link" element={<CreatePaymentLink />} />
+            <Route
+              path="dashboard/create_payment_link"
+              element={<CreatePaymentLink />}
+            />
             <Route path="dashboard/products" element={<Products />} />
-            <Route path="dashboard/create_product" element={<CreateProduct />} />
+            <Route
+              path="dashboard/create_product"
+              element={<CreateProduct />}
+            />
             <Route path="dashboard/settings" element={<Settings />} />
             <Route path="dashboard/bank-payout" element={<AccountSending />} />
-            <Route path="dashboard/wallet-payout" element={<AddressSending />} />
+            <Route
+              path="dashboard/wallet-payout"
+              element={<AddressSending />}
+            />
             <Route path="dashboard/topup" element={<TopUp />} />
             <Route path="dashboard/address_topup" element={<AddressTopUp />} />
             <Route path="dashboard/bank_topup" element={<BankTopUp />} />
+            <Route
+              path="dashboard/product_view/:id"
+              element={<ProductView />}
+            />
+            <Route
+              path="product_link/:id/:productName"
+              element={<ProductLinkPayment />}
+            />
+            <Route
+              path="reciept"
+              element={<Reciept />}
+            />
+          
             <Route
               path="*"
               element={

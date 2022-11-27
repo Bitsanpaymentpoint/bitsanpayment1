@@ -12,11 +12,12 @@ router.post("/saveLinkTransaction", (req, res) => {
     type,
     userEmail,
     linkTitle,
-    convertedValue,
+    productName,
     addressPayout,
     addressTo,
     bankTopUp,
     BankPaymentOut,
+    productPay
   } = req.body;
   try {
     const newHistory = new transactionHistory({
@@ -29,11 +30,16 @@ router.post("/saveLinkTransaction", (req, res) => {
     newHistory
       .save()
       .then((data) => {
-        if (type === "Payment in") {
-          let recipient_message = `You have been credited with ${amount}ether(s) on your ${linkTitle} payment link from ${from} to your bitsan account's address, please login to verify the transaction on your transaction history.`;
+        // handeling sendMail after transaction is saved
+        if (type === "Payment in" && !productPay) {
+          let recipient_message = `You have been credited with ${amount}ether(s) on your ${linkTitle} payment link, from ${from} to your bitsan account's address, please login to verify the transaction on your transaction history.`;
           let subject = "Bitsan payment in alert";
           sendMail(userEmail, recipient_message, subject);
-        } else if (type === "Payment out" && !BankPaymentOut) {
+        } else if(type === "Payment in" && productPay){
+          let recipient_message = `You have been credited with ${amount}ether(s) for your ${productName}, from ${from} to your bitsan account's address, please login to verify the transaction on your transaction history.`
+          let subject = "Bitsan payment in alert";
+          sendMail(userEmail, recipient_message, subject);
+        }else if (type === "Payment out" && !BankPaymentOut) {
           let subject = "Bitsan payment out alert";
           let recipient_message = `You have been debited with ${amount}ether(s) on your to your bitsan account's address and will you will be credited on ${addressTo} as requested on your payout, please login to verify the transaction on your transaction history.`;
           sendMail(userEmail, recipient_message, subject);

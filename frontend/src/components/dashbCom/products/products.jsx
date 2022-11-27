@@ -11,20 +11,22 @@ import logo from "../../../image/logo.jpg";
 
 function Products({ setTab, paymentLinkId, setPaymentLinkId }) {
   const { user, refetchUser } = useContext(userCOntext);
-  console.log(user?.user?.userId);
-  const [linkInfo, setLinkInfo] = useState([]);
+  // console.log(user?.user?.userId);
+  const [productInfo, setProductInfo] = useState([]);
   const [privateCopy, setPrivateCopy] = useState(false);
   const [toast, setToast] = useState(null);
 
-  useEffect(() => {
-    console.log("yo");
-    axios
-      .post("/getUserPaymentLink", { userId: user?.user?.userId })
-      .then((response) => {
-        console.log("response ", response.data.data);
-        setLinkInfo(response.data.data.reverse());
+  const getProducts = () => {
+    axios("/products/getAllProducts")
+      .then((data) => {
+        setProductInfo(data.data);
+        console.log("data all prod ", data.data);
       })
-      .catch((error) => console.log("error ", error));
+      .catch((error) => console.log(error));
+  };
+
+  useEffect(() => {
+    getProducts();
   }, []);
 
   useEffect(() => {
@@ -53,22 +55,20 @@ function Products({ setTab, paymentLinkId, setPaymentLinkId }) {
             <div>
               {toast && <Toastify info={toast} setToast={setToast} />}
 
-              <table onClick={() => console.log(linkInfo)}>
+              <table onClick={() => console.log(productInfo)}>
                 <>
                   <thead>
                     <tr>
                       <th colSpan="5">Products</th>
                       <th colSpan="2">
                         <button
-                          onClick={() =>
-                            navigate("/dashboard/create_product")
-                          }
+                          onClick={() => navigate("/dashboard/create_product")}
                         >
                           Add Product
                         </button>
                       </th>
                     </tr>
-                    <tr>
+                    <tr onClick={() => console.log(productInfo)}>
                       <th>ID</th>
                       <th>Image</th>
                       <th>Title</th>
@@ -79,45 +79,62 @@ function Products({ setTab, paymentLinkId, setPaymentLinkId }) {
                       <th>View</th>
                     </tr>
                   </thead>
-                  {linkInfo.length === 0 ? (
-                    <th colSpan="7">No links has been created yet!!</th>
+                  {productInfo.length === 0 ? (
+                    <th colSpan="7">No products has been created yet!!</th>
                   ) : (
                     <tbody>
-                      {linkInfo &&
-                        linkInfo.map((item, index) => (
-                          <tr key={index}>
-                            <td>{index + 1}</td>
-                            <td><img src={logo} alt="product-img" /></td>
-                            <td>{item.title}</td>
-                            <td>{item.description?.substring(0, 25)}...</td>
-                            <td>{item?.paymentLink?.substring(0, 18)}...</td>
-                            <td
-                              style={{
-                                color:
-                                  item?.status === "active"
-                                    ? "green"
-                                    : "indianred",
-                                fontWeight: "bold",
-                                textTransform: "",
-                              }}
-                            >
-                              {item?.status}
-                            </td>
-                            {/* <td
-                              style={{ cursor: "pointer" }}
-                              onClick={() => copiedLink(item?.paymentLink)}
-                            >
-                              copy
-                            </td> */}
-                            <NavLink
-                              to={`/dashboard/payment_link_view/${item._id}`}
-                            >
-                              <td style={{ cursor: "pointer" }}>
-                                <span style={{ color: "black" }}>view</span>
+                      {productInfo &&
+                        productInfo.map((item, i) => {
+                          const base64String = btoa(
+                            new Uint8Array(item.img.data.data).reduce(function (
+                              data,
+                              byte
+                            ) {
+                              return data + String.fromCharCode(byte);
+                            },
+                            "")
+                          );
+                          return (
+                            <tr>
+                              <td
+                                onClick={() =>
+                                  console.log(item.img.contentType)
+                                }
+                              >
+                                {i + 1}
                               </td>
-                            </NavLink>
-                          </tr>
-                        ))}
+                              <td>
+                                {" "}
+                                <img
+                                  src={`data:${item.img.contentType};base64,${base64String}`}
+                                  alt="product-img"
+                                />
+                              </td>
+                              <td>{item?.productName}</td>
+                              <td>{item?.description?.substring(0, 25)}...</td>
+                              <td>{item?.productLink?.substring(0, 18)}...</td>
+                              <td
+                                style={{
+                                  color:
+                                    item?.status === "active"
+                                      ? "green"
+                                      : "indianred",
+                                  fontWeight: "bold",
+                                  textTransform: "",
+                                }}
+                              >
+                                {item?.status}
+                              </td>
+                              <NavLink
+                                to={`/dashboard/product_view/${item._id}`}
+                              >
+                                <td style={{ cursor: "pointer" }}>
+                                  <span style={{ color: "black" }}>view</span>
+                                </td>
+                              </NavLink>
+                            </tr>
+                          );
+                        })}
                     </tbody>
                   )}
                 </>

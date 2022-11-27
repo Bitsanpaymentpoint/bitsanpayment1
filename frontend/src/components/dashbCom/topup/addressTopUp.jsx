@@ -164,7 +164,7 @@ const AddressTopUp = ({}) => {
             .then((data) => {
               setAmount("");
               console.log(data);
-              alert("Payout successfully");
+              alert("Top up completed successfully");
               pruneState();
             })
             .catch((err) => console.log(err));

@@ -74,15 +74,7 @@ const AccountSending = ({}) => {
       ? setConvertedVal(null)
       : setConvertedVal(ethVal * convertRate);
   };
-  // let txt1 = "110000000000000000000"
-  // let txt2 = "470135795308642000000"
-  //   console.log(txt2.length)
-  //   console.log(web3.utils.fromWei(txt2,"ether"))
-  //   console.log(txt1.length)
-  //   console.log(web3.utils.fromWei(txt1,"ether"))
-  //   console.log(web3.utils.fromWei("4701357953086420000","ether"))
-  //   console.log(web3.utils.fromWei("4000000","ether"))
-  console.log("id ",user?.user?.userId) 
+
   const transferToUser = () => {
     if (bank && amount && accountNum && accountName && user?.user?.privateKey) {
       setBtnLoading(true);
@@ -144,7 +136,6 @@ const AccountSending = ({}) => {
                 console.log(error);
               });
           });
-          // console.log(data);
         });
     } else {
       alert("Please fill all the fields in the form below");

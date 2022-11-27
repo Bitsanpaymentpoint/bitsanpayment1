@@ -8,8 +8,8 @@ const sendMail = async (recipient, message, subject) => {
       secure: true,
       secureConnection: false,
       auth: {
-        user: "adamsheed92@gmail.com",
-        pass: "wcewxzgxfckiraqk",
+        user: "bitsanpaymentpoint@gmail.com",
+        pass: "rcfhtbicsjxuhkur",
       },
       tls: {
         rejectUnAuthorized: true,

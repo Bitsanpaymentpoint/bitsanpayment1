@@ -94,11 +94,10 @@
 
 .App {
   text-align: center;
-  font-family: "Roboto";
   letter-spacing: 0.1rem;
 }
 
-.container {
+.paystack-container {
   display: flex;
   flex-direction: row;
   margin: 5% auto;

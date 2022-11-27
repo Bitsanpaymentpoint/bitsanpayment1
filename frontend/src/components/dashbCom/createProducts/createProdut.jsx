@@ -13,6 +13,7 @@ import { MdOpenInNew } from "react-icons/md";
 import { GiCancel } from "react-icons/gi";
 import { useDropzone } from "react-dropzone";
 import logo from "../../../image/logo.jpg";
+import Axios from "axios";
 
 const customStyles = {
   content: {
@@ -36,16 +37,17 @@ Modal.setAppElement("#root");
 
 function CreateProduct({ setTab }) {
   const [confirmType, setConfirmationType] = useState("display-payment-page");
-  const [prodName, setProdName] = useState("");
-  const [description, setDescription] = useState("");
-  const [confirmationText, setConfirmationText] = useState("");
+  const [prodName, setProdName] = useState("prod 1");
+  const [description, setDescription] = useState("just describing");
+  const [confirmationText, setConfirmationText] = useState(
+    "thanks for your payment"
+  );
   const [redirectUrl, setRedirectUrl] = useState("");
   const { user, refetchUser } = useContext(userCOntext);
   const [link, setLink] = useState("");
   const [loading, setLoading] = useState(false);
   const [image, setImage] = useState(null);
   const [price, setPrice] = useState(null);
-
   let subtitle;
   const [modalIsOpen, setIsOpen] = React.useState(false);
 
@@ -68,41 +70,8 @@ function CreateProduct({ setTab }) {
     setDescription("");
     setRedirectUrl("");
   };
-	
-  // const createLink = () => {
-  //   setLoading(true);
-  //   axios
-  //     .post("/createPaymentLink", {
-  //       email: user?.user?.email,
-  //       userId: user?.user?.userId,
-  //       description,
-  //       prodName,
-  //       confirmationType: confirmType,
-  //       redirectUrl,
-  //       confirmationText,
-  //       paymentLink:
-  //         "localhost:3000/payment_gateway/" +
-  //         user?.user?.userId +
-  //         "/" +
-  //         prodName.split(" ").join("_"),
-  //     })
-  //     .then((data) => {
-  //       setLoading(false);
-  //       if (data.data.err_message) {
-  //         alert(data.data.err_message);
-  //       } else {
-  //         setLink(
-  //           "http://localhost:3000/payment_gateway/" +
-  //             user?.user?.userId +
-  //             "/" +
-  //             prodName.split(" ").join("_")
-  //         );
-  //         openModal();
-  //         pruneState();
-  //       }
-  //     })
-  //     .catch((err) => setLoading(false));
-  // };
+
+  console.log(user?.user?.userId)
 
   const thumbsContainer = {
     display: "flex",
@@ -158,28 +127,28 @@ function CreateProduct({ setTab }) {
 
   const uploadProduct = async () => {
     console.log(files[0]);
-		let productData = new FormData()
-    // formData.append('file', image.data)
-    productData.append("image", files[0]);
-    productData.append("prodName", prodName);
-    // formData.append("productInfo", {
-    //   redirectUrl,
-    //   prodName,
-    //   description,
-    //   price,
-    // 	paymentLink:
-    // 	"localhost:3000/payment_gateway/" +
-    // 	user?.user?.userId +
-    // 	"/" +
-    // 	prodName.split(" ").join("_"),
-    // });
+    let productData = new FormData();
+    let productLink =
+      "localhost:3000/product_link/" +
+      user?.user?.userId +
+      "/" +
+      prodName.split(" ").join("_");
+
+    productData.append("redirectUrl", redirectUrl);
+    productData.append("description", description);
     productData.append("price", price);
+    productData.append("prodName", prodName);
+    productData.append("userId", user?.user?.userId);
+    productData.append("productLink", productLink);
+    productData.append("image", files[0]);
+
     axios
-      .post("/uploadProduct", productData)
+      .post("/products/uploadProduct", productData)
       .then((data) => {
         console.log(data);
       })
       .catch((err) => console.log(err));
+
     console.log(description, prodName, price, redirectUrl);
   };
 
@@ -221,7 +190,10 @@ function CreateProduct({ setTab }) {
                 <DashbHeader />
               </div>
               <div className="body" style={{ marginTop: "6em" }}>
-                <div className="create-link-container container">
+                <div
+                  className="create-link-container"
+                  style={{ width: "100%" }}
+                >
                   <div>
                     <Modal
                       isOpen={modalIsOpen}
@@ -256,7 +228,7 @@ function CreateProduct({ setTab }) {
                       </div>
                     </Modal>
                   </div>
-{/* <input type="file" onChange={e=>console.log(e.target.files[0])}/> */}
+                  {/* <input type="file" onChange={e=>console.log(e.target.files[0])}/> */}
                   <div className="link-pay-container">
                     <div className="link-payment-header">
                       <div className="link-icon">

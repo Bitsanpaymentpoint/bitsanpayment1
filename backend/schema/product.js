@@ -23,14 +23,19 @@ const ProductLinkSchema = new mongoose.Schema({
     type: Number,
     default: 0,
     required: true,
-},
-  paymentLink: {
+  },
+  productLink: {
     type: String,
     required: true,
   },
   status: {
     type: String,
     default: "active",
+  },
+  fileName: String,
+  img: {
+    data: Buffer,
+    contentType: String,
   },
 });
 

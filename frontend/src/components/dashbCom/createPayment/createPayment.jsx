@@ -114,7 +114,7 @@ function CreatePaymentLink({ setTab }) {
                 <DashbHeader />
               </div>
               <div className="body" style={{ marginTop: "6em" }}>
-                <div className="create-link-container container">
+                <div className="create-link-container" style={{width:"100%"}}>
                   <div>
                     <Modal
                       isOpen={modalIsOpen}

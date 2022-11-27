@@ -9,6 +9,7 @@ const userLogin = require("./routes/login");
 const createPaymentLink = require("./routes/createPaymentLink");
 const verifyLink = require("./routes/verifyLink");
 const getUserPaymentLink = require("./routes/getUserPaymentLinks");
+const getUserProductLink = require("./routes/getUserProduct");
 const { decrypt, encrypt } = require("./utils/privateKeyEncrypt");
 const saveLinkTransaction = require("./routes/transactionHistory");
 const uploadProduct = require("./routes/createProduct");
@@ -35,7 +36,8 @@ app.use("/createPaymentLink", createPaymentLink);
 app.use("/verifyLink", verifyLink);
 app.use("/getUserPaymentLink", getUserPaymentLink);
 app.use("/transactionHistory", saveLinkTransaction);
-app.use("/uploadProduct", uploadProduct);
+app.use("/products", uploadProduct);
+app.use("/getUserProductLink", getUserProductLink);
 app.use("/userUpdate", userUpdate);
 app.use("/transferToUser", transferToUser);
 
