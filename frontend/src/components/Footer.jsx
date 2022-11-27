@@ -29,24 +29,23 @@ const Footer = () => {
                 </div>
             </article>
             <article>
-                <h4>Permalinks</h4>
+                <h4>Home</h4>
+                <Link to="/home">Home</Link>
                 <Link to="/platform">PlatForm</Link>
-                <Link to="/usecase">Usecase</Link>
                 <Link to="/developer">Developer</Link>
                 <Link to="/pricing">Pricing</Link>
-                <Link to="/resources">Resources</Link>
-                <Link to="/network">Network</Link>
                 <Link to="/contact">Contact</Link>
             </article>
             <article>
-                <h4>Permalinks</h4>
-                <Link to="/platform">PlatForm</Link>
-                <Link to="/usecase">Usecase</Link>
-                <Link to="/developer">Developer</Link>
-                <Link to="/pricing">Pricing</Link>
-                <Link to="/resources">Resources</Link>
-                <Link to="/network">Network</Link>
-                <Link to="/contact">Contact</Link>
+                <h4>Dashboard</h4>
+                <Link to="/dashboard">Dashboard</Link>
+                <Link to="dashboard/users">Users</Link>
+                <Link to="dashboard/transactions">Transaction</Link>
+                <Link to="dashboard/payment_links">PaymentLink</Link>
+                <Link to="dashboard/product">Product</Link>
+                <Link to="dashboard/payout">Payout</Link>
+                <Link to="dashboard/profile">Profile</Link>
+                <Link to="dashboard/settings">Settings</Link>
             </article>
             <article>
                 <h4>Permalinks</h4>
